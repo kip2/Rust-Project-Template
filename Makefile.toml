@@ -27,6 +27,13 @@ args = [
     "${@}",
 ]
 
+[tasks.dev]
+extend = "set-env-local"
+dependencies = ["compose-up-db"]
+command = "cargo"
+args = ["watch", "-x", "run"]
+env_files = [".env"]
+
 [tasks.run-only-api]
 extend = "set-env-local"
 dependencies = ["before-build"]
