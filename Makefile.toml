@@ -27,13 +27,13 @@ args = [
     "${@}",
 ]
 
-[tasks.run]
+[tasks.run-only-api]
 extend = "set-env-local"
 dependencies = ["before-build"]
 command = "cargo"
 args = ["run", "${@}"]
 
-[tasks.run-in-docker]
+[tasks.run]
 extend = "set-env-local"
 dependencies = ["before-build", "compose-build-app"]
 command = "docker"
