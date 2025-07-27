@@ -1,4 +1,4 @@
-use std::net::{Ipv4Addr, SocketAddr};
+use std::net::SocketAddr;
 
 use anyhow::Result;
 use axum::{Router, extract::State, http::StatusCode, routing::get};
@@ -42,12 +42,14 @@ async fn health_check_db(State(db): State<PgPool>) -> StatusCode {
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    dotenv::dotenv().ok();
+
     let database_cfg = DatabaseConfig {
-        host: "localhost".into(),
-        port: 5432,
-        username: "app".into(),
-        password: "passwd".into(),
-        database: "app".into(),
+        host: std::env::var("DATABASE_HOST")?,
+        port: std::env::var("DATABASE_PORT")?.parse()?,
+        username: std::env::var("DATABASE_USERNAME")?,
+        password: std::env::var("DATABASE_PASSWORD")?,
+        database: std::env::var("DATABASE_NAME")?,
     };
     let conn_pool = connect_database_with(database_cfg);
 
@@ -55,7 +57,7 @@ async fn main() -> Result<()> {
         .route("/health", get(health_check))
         .route("/health/db", get(health_check_db))
         .with_state(conn_pool);
-    let addr = SocketAddr::new(Ipv4Addr::LOCALHOST.into(), 8080);
+    let addr = SocketAddr::from(([0, 0, 0, 0], 8080));
     let listener = TcpListener::bind(addr).await?;
     println!("Listening on {}", addr);
     axum::serve(listener, app).await?;

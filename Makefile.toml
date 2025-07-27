@@ -39,6 +39,11 @@ dependencies = ["before-build", "compose-build-app"]
 command = "docker"
 args = ["compose", "up", "-d", "app"]
 
+[tasks.destroy]
+extend = "set-env-docker"
+command = "docker"
+args = ["compose", "down"]
+
 [tasks.logs]
 extend = "set-env-local"
 dependencies = ["before-build"]
@@ -50,12 +55,6 @@ extend = "set-env-local"
 dependencies = ["before-build"]
 command = "docker"
 args = ["build", "${@}"]
-
-[tasks.check]
-extend = "set-env-local"
-dependencies = ["before-build"]
-command = "docker"
-args = ["check"]
 
 [tasks.watch]
 extend = "set-env-local"
