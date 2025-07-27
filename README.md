@@ -32,13 +32,42 @@ cargo make --version
 > cargo make compose
 > ```
 
-起動確認は、以下のコマンドを用いて行います。
+### 起動
+
+起動の前にDocker Desktopを起動して下さい。
+
+アプリの起動は以下のコマンドで行います。
+
+```sh
+cargo make run
+```
+
+これでDocker内でアプリとDBが起動され、アクセスできる状態となります。
+
+手動での起動確認は以下のコマンドより行ってみてください。
+
+```sh
+# APIのヘルスチェック
+curl http://localhost:8080/health
+
+# DBのヘルスチェック
+curl http://localhost:8080/health/db
+```
+
+### cargo makeによる起動テスト
+
+`cargo make`を利用した確認は、以下のコマンドを用いて行います。
 
 ```sh
 cargo make test
 ```
 
-このテストにより、サーバ起動からDBへの疎通確認が行われます。
+このテストにより、サーバ起動からDBへの疎通までの一連の認が行われます。
 
-テストが成功していれば、起動が成功していると言えるでしょう。
+## 終了方法
 
+アプリやDBを閉じるには以下のコマンドを実行してください。
+
+```sh
+cargo make destroy
+```
