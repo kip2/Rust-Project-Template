@@ -4,6 +4,26 @@
 
 ---
 
+## 事前準備
+
+タスクランナーとして`cargo-make`を、ファイル監視ツールとして`bacon`を採用しています。
+
+https://github.com/sagiegurari/cargo-make
+
+https://github.com/Canop/bacon
+
+### `cargo-make`のインストール
+
+```sh
+cargo install cargo-make
+```
+
+### `baocn`のインストール
+
+```sh
+cargo install bacon
+```
+
 ## 起動の仕方
 
 起動の前にDocker Desktopを起動して下さい。

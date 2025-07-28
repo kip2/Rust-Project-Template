@@ -30,9 +30,16 @@ args = [
 [tasks.dev]
 extend = "set-env-local"
 dependencies = ["compose-up-db"]
-command = "cargo"
-args = ["watch", "-x", "run"]
+command = "bacon"
+args = ["nextest"]
 env_files = [".env"]
+
+[tasks.check]
+dependencies = ["fmt", "clippy", "test"]
+
+[tasks.only-run]
+command = "cargo"
+args = ["run"]
 
 [tasks.run-only-api]
 extend = "set-env-local"
@@ -77,7 +84,7 @@ args = ["fmt", "--all", "${@}"]
 [tasks.clippy]
 extend = "set-env-local"
 command = "cargo"
-args = ["clippy", "--all", "--all-targets", "${@]"]
+args = ["clippy", "--all", "--all-targets", "${@}"]
 
 [tasks.test]
 extend = "set-env-local"
