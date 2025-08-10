@@ -24,6 +24,14 @@ cargo install cargo-make
 cargo install bacon
 ```
 
+### `.env`ファイルの設定
+
+`.env`ファイルを`.env-template`として用意しています。
+
+ファイル名を`.env`に変更してください。
+
+環境変数の設定値を変える場合は、設定を変更してください。
+
 ## 起動の仕方
 
 起動の前にDocker Desktopを起動して下さい。
@@ -83,4 +91,24 @@ cargo make test
 
 ```sh
 cargo make destroy
+```
+
+---
+
+## 個別
+
+### DBのみ起動する
+
+1. Dockerを起動する。
+2. 以下のコマンドを実行する。
+
+```sh
+cargo make compose-up-db
+```
+
+接続確認は以下のコマンドで行うこと。
+
+```sh
+# 接続テスト(テンプレのままの.envの場合)
+psql -h localhost -p 5678 -U app -d app
 ```
