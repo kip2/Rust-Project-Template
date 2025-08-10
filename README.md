@@ -1,6 +1,6 @@
-# Poc Image Upload Service
+# Rust project template
 
-画像をアップロードするだけの簡単なAPIを作成する
+Rustのプロジェクト作成の際に使用できるテンプレートリポジトリです。
 
 ---
 
