@@ -112,3 +112,29 @@ cargo make compose-up-db
 # 接続テスト(テンプレのままの.envの場合)
 psql -h localhost -p 5678 -U app -d app
 ```
+
+### テスト用のテーブル作成
+
+DB起動後に`sqlx-cli`を用いて、マイグレーションを行うことができる。
+
+まずはマイグレーションファイルを作成する。
+
+```sh
+sqlx migrate add -r <migration-file-name>
+```
+
+`up`と`down`ファイルが作成されるので、テーブル定義を記載する。
+
+サンプルとして`users`テーブルを記載している。
+
+記載後、マイグレーションを実施する。
+
+```sh
+sqlx migrate run
+```
+
+行って戻す場合は`revert`する
+
+```sh
+sqlx migrate revert
+```
